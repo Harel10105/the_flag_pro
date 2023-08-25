@@ -1,6 +1,9 @@
 import time
+
+import keyboard as keyboard
 import pygame
 
+import Database
 import consts
 import game_field
 import Screen
@@ -12,7 +15,8 @@ global game_board
 global soldier
 
 
-def pygame_keys_events():
+# check player keyboard input
+def pygame_keys_events(screen):
     global see_trap_mode
     global finish_game
     global game_board
@@ -24,6 +28,42 @@ def pygame_keys_events():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 see_trap_mode = True
+            # save and load game board for every key (1-9)
+            if event.key == pygame.K_1:
+                t = check_press_time()
+                save_or_load(t, 1, screen)
+
+            if event.key == pygame.K_2:
+                t = check_press_time()
+                save_or_load(t, 2, screen)
+
+            if event.key == pygame.K_3:
+                t = check_press_time()
+                save_or_load(t, 3, screen)
+
+            if event.key == pygame.K_4:
+                t = check_press_time()
+                save_or_load(t, 4, screen)
+
+            if event.key == pygame.K_5:
+                t = check_press_time()
+                save_or_load(t, 5, screen)
+
+            if event.key == pygame.K_6:
+                t = check_press_time()
+                save_or_load(t, 6, screen)
+
+            if event.key == pygame.K_7:
+                t = check_press_time()
+                save_or_load(t, 7, screen)
+
+            if event.key == pygame.K_8:
+                t = check_press_time()
+                save_or_load(t, 8, screen)
+
+            if event.key == pygame.K_9:
+                t = check_press_time()
+                save_or_load(t, 9, screen)
             if not see_trap_mode:
                 if event.key == pygame.K_UP:
                     soldier_location = soldier.get_location()
@@ -37,6 +77,28 @@ def pygame_keys_events():
                 if event.key == pygame.K_LEFT:
                     soldier_location = soldier.get_location()
                     game_board = soldier.update_location([soldier_location[0], soldier_location[1] - 1])
+
+
+def check_press_time():
+    t = time.time()  # Getting time in sec
+    b = keyboard.read_event()
+    while not b.event_type == "up":
+        b = keyboard.read_event()
+    print('Pressed Key "' + b.name + '" for ' + str(time.time() - t))
+    return time.time() - t
+
+
+def save_or_load(time_pressed, key, screen):
+    global game_board
+    global soldier
+
+    if time_pressed > 1:
+        Database.save_data(key, game_board)
+    else:
+        game_board = Database.load_data_for_game(key, game_board)
+        soldier.set_map(game_board)
+        Screen.display_screen(screen, game_board)
+        print(game_board)
 
 
 def main():
@@ -67,7 +129,7 @@ def main():
         elif soldier.is_touch_flag():
             Screen.display_win(screen)
             finish_game = True
-        pygame_keys_events()
+        pygame_keys_events(screen)
 
         clock.tick(consts.REFRESH_RATE)
 
