@@ -60,6 +60,13 @@ def main():
         else:
             Screen.display_night_vision_screen(screen, game_board)
             see_trap_mode = False
+
+        if soldier.is_touch_trap():
+            Screen.display_lose(screen, soldier)
+            finish_game = True
+        elif soldier.is_touch_flag():
+            Screen.display_win(screen)
+            finish_game = True
         pygame_keys_events()
 
         clock.tick(consts.REFRESH_RATE)

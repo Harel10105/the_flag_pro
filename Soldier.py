@@ -10,6 +10,13 @@ class Soldier:
     def get_location(self):
         return self._soldier_location
 
+    def get_map(self):
+        return self._game_map
+
+    def set_map(self, game_board):
+        self._game_map = game_board
+        self.__find_me()
+
     def update_location(self, new_location):
         if self.__is_next_step_on_board(new_location):
             self._game_map[self._soldier_location[0]][self._soldier_location[1]] = consts.FREE_SPACE
@@ -27,11 +34,24 @@ class Soldier:
         return True
 
     # check if the soldier touch a trap
-    def is_touch_trap(self, new_location):
-        if (self._game_map[new_location[0] + 3][new_location[1]] == consts.TRAP) or \
-                (self._game_map[new_location[0] + 3][new_location[1] + 1] == consts.TRAP):
+    def is_touch_trap(self):
+        if (self._game_map[self._soldier_location[0] + 3][self._soldier_location[1]] == consts.TRAP) or \
+                (self._game_map[self._soldier_location[0] + 3][self._soldier_location[1] + 1] == consts.TRAP):
             return True
         return False
+
+    # check if the soldier touch the flag
+    def is_touch_flag(self):
+        if (self._game_map[self._soldier_location[0] + 3][self._soldier_location[1]] == consts.FLAG) or \
+                (self._game_map[self._soldier_location[0] + 3][self._soldier_location[1] + 1] == consts.FLAG):
+            return True
+        return False
+
+    def __find_me(self):
+        for row in range(len(self._game_map)):
+            for col in range(len(self._game_map[row])):
+                if self._game_map[row][col] == consts.SOLDIER:
+                    self._soldier_location = [row, col]
 
 
 

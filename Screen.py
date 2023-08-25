@@ -90,7 +90,18 @@ def display_win(screen):
 
 
 # display lose screen
-def display_lose(screen):
+def display_lose(screen, soldier):
+    screen.fill(consts.SCREEN_BACKGROUND)
+    display_bushes(screen, soldier.get_map())
+    display_flag(screen)
+    soldier_location = soldier.get_location()
+    display_image(screen, consts.INJURY_IMAGE, (soldier_location[1] * consts.SCREEN_BLOCK_WIDTH,
+                                                soldier_location[0] * consts.SCREEN_BLOCK_HEIGHT - consts.SOLDIER_BLOCK_HEIGHT * 5))
+    display_image(screen, consts.EXPLOSION_IMAGE, (
+        soldier_location[1] * consts.SCREEN_BLOCK_WIDTH - consts.SCREEN_BLOCK_WIDTH / 2,
+        soldier_location[0] * consts.SCREEN_BLOCK_HEIGHT))
+    pygame.display.flip()
+    time.sleep(3)
     display_image(screen, consts.LOSE_IMAGE, (0, 0))
     pygame.display.flip()
     time.sleep(3)
