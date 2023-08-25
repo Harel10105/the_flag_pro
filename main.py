@@ -1,5 +1,4 @@
 import time
-
 import keyboard as keyboard
 import pygame
 
@@ -64,6 +63,8 @@ def pygame_keys_events(screen):
             if event.key == pygame.K_9:
                 t = check_press_time()
                 save_or_load(t, 9, screen)
+
+            # move the soldier by keyboard
             if not see_trap_mode:
                 if event.key == pygame.K_UP:
                     soldier_location = soldier.get_location()
@@ -79,6 +80,7 @@ def pygame_keys_events(screen):
                     game_board = soldier.update_location([soldier_location[0], soldier_location[1] - 1])
 
 
+# check the length of the click
 def check_press_time():
     t = time.time()  # Getting time in sec
     b = keyboard.read_event()
@@ -88,6 +90,7 @@ def check_press_time():
     return time.time() - t
 
 
+# save or load the game board of the game from or to the database
 def save_or_load(time_pressed, key, screen):
     global game_board
     global soldier
@@ -101,6 +104,7 @@ def save_or_load(time_pressed, key, screen):
         print(game_board)
 
 
+# main game loop
 def main():
     global finish_game
     global see_trap_mode
