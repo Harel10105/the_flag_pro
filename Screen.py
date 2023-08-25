@@ -20,6 +20,7 @@ def display_screen(screen, game_board):
     display_soldier(screen, game_board, consts.SOLDIER_IMAGE)
     display_flag(screen)
     pygame.display.flip()
+    pygame.display.update()
 
 
 # draw the night - vision screen
@@ -41,7 +42,6 @@ def display_image(screen, path, size):
     img = pygame.image.load(path)
     img.set_colorkey(consts.REMOVE_COLOR)
     screen.blit(img, size)
-    pygame.display.update()
 
 
 # draw all the bushes

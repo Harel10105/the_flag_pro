@@ -7,11 +7,15 @@ class Soldier:
         self._game_map = game_map
         self._game_map[self._soldier_location[0]][self._soldier_location[1]] = consts.SOLDIER
 
+    def get_location(self):
+        return self._soldier_location
+
     def update_location(self, new_location):
         if self.__is_next_step_on_board(new_location):
             self._game_map[self._soldier_location[0]][self._soldier_location[1]] = consts.FREE_SPACE
             self._game_map[new_location[0]][new_location[1]] = consts.SOLDIER
             self._soldier_location = new_location
+        return self._game_map
 
     # Check if Soldier's next move is on board:
     @staticmethod
@@ -28,4 +32,6 @@ class Soldier:
                 (self._game_map[new_location[0] + 3][new_location[1] + 1] == consts.TRAP):
             return True
         return False
+
+
 
