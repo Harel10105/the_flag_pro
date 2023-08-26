@@ -1,5 +1,5 @@
 # constants of pygame
-REFRESH_RATE = 60
+REFRESH_RATE = 100
 
 # constants of the symbols of the game map
 FREE_SPACE = 'X'

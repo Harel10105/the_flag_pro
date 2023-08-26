@@ -3,6 +3,7 @@ import pandas as pd
 import consts
 
 
+# save the data in the csv file
 def save_data(key, game_board):
     save_dict = load_data(game_board)
     save_dict[str(key)] = game_board
@@ -10,6 +11,7 @@ def save_data(key, game_board):
     new.to_csv("save_data.csv", index=False, header=True)
 
 
+# loading all the data from the csv file and convert the saved data to type <list>
 def load_data(game_board):
     game_states = pd.read_csv("save_data.csv")
     game_states["1"] = game_states["1"].apply(eval)
@@ -33,6 +35,7 @@ def load_data(game_board):
     return save_dict
 
 
+# loading the data for selected save key
 def load_data_for_game(key, game_board):
     current_game_data = load_data(game_board)[str(key)]
     return current_game_data
