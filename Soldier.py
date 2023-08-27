@@ -78,3 +78,9 @@ class Soldier:
                                rnd_tp_location[0][1]])
         return self._game_map
 
+    def is_touch_guard(self):
+        for rowPlus in range(consts.SOLDIER_BLOCK_HEIGHT):
+            for colPlus in range(consts.SOLDIER_BLOCK_WIDTH):
+                if self._game_map[self._soldier_location[0] + rowPlus][self._soldier_location[1] + colPlus] == consts.GUARD:
+                    return True
+        return False

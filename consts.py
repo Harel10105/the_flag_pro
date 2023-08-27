@@ -8,6 +8,7 @@ TRAP = 'O'
 FLAG = 'F'
 BUSH = 'B'
 TP = 'TP'
+GUARD = 'G'
 
 # constants of the game board settings
 NUM_OF_ROWS = 25
@@ -40,6 +41,7 @@ EXPLOSION_IMAGE = "images/explotion.png"
 NIGHT_VISION_BACKGROUND = "images/Final_lazer-net.png"
 NIGHT_VISION_SOLDIER = "images/soldier_nigth.png"
 TP_IMAGE = "images/teleport.png"
+GUARD_IMAGE = "images/the_guard.png"
 WIN_IMAGE = "images/youWin.png"
 LOSE_IMAGE = "images/game_over.png"
 
@@ -64,3 +66,7 @@ SOLDIER_HEIGHT = SOLDIER_BLOCK_HEIGHT * SCREEN_BLOCK_HEIGHT
 # constants of teleport settings
 NUM_OF_TP = 5
 TP_BLOCKS_WIDTH = 3
+
+# constants of guard
+GUARD_MOVE_F = 10
+GUARD_LOCATION_HEIGHT = int(NUM_OF_ROWS / 2) - 1

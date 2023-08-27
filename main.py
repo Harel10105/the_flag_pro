@@ -7,12 +7,14 @@ import consts
 import game_field
 import Screen
 import Soldier
+import guard
 import teleport
 
 global finish_game
 global see_trap_mode
 global game_board
 global soldier
+global guard_location
 
 
 # check player keyboard input
@@ -95,10 +97,13 @@ def check_press_time():
 def save_or_load(time_pressed, key, screen):
     global game_board
     global soldier
+    global guard_location
+
     if time_pressed > 1:
         Database.save_data(key, game_board)
     else:
         game_board = Database.load_data_for_game(key, game_board)
+        guard_location = guard.find_guard(game_board)
         soldier.set_map(game_board)
         Screen.display_screen(screen, soldier.get_map())
         print(game_board)
@@ -111,6 +116,7 @@ def main():
     global see_trap_mode
     global game_board
     global soldier
+    global guard_location
 
     see_trap_mode = False
     screen, clock = Screen.pygame_init()
@@ -120,17 +126,26 @@ def main():
     game_field.locate_flag(game_board)
     tp_location_list = teleport.generate_teleport_locations(game_board)
     soldier = Soldier.Soldier(game_board, [0, 0])
+    guard_location = [int(consts.NUM_OF_ROWS / 2) - 1, consts.NUM_OF_COLS - 1]
+    is_guard_move_left = True
+    gourd_walk_counter = 1
 
     finish_game = False
     while not finish_game:
         if not see_trap_mode:
+            if gourd_walk_counter % consts.GUARD_MOVE_F == 0:
+                game_board[guard_location[0]][guard_location[1]] = consts.FREE_SPACE
+                guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left)
+                game_board[guard_location[0]][guard_location[1]] = consts.GUARD
+                soldier.set_map(game_board)
             Screen.display_screen(screen, game_board)
+            gourd_walk_counter += 1
             game_board = soldier.is_touch_tp(game_board, tp_location_list)
         else:
             Screen.display_night_vision_screen(screen, game_board)
             see_trap_mode = False
 
-        if soldier.is_touch_trap():
+        if soldier.is_touch_trap() or soldier.is_touch_guard():
             Screen.display_lose(screen, soldier)
             finish_game = True
         elif soldier.is_touch_flag():
