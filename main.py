@@ -30,39 +30,39 @@ def pygame_keys_events(screen):
             # save and load game board for every key (1-9)
             if event.key == pygame.K_1:
                 t = check_press_time()
-                save_or_load(t, 1, screen)
+                game_board = save_or_load(t, 1, screen)
 
             if event.key == pygame.K_2:
                 t = check_press_time()
-                save_or_load(t, 2, screen)
+                game_board = save_or_load(t, 2, screen)
 
             if event.key == pygame.K_3:
                 t = check_press_time()
-                save_or_load(t, 3, screen)
+                game_board = save_or_load(t, 3, screen)
 
             if event.key == pygame.K_4:
                 t = check_press_time()
-                save_or_load(t, 4, screen)
+                game_board = save_or_load(t, 4, screen)
 
             if event.key == pygame.K_5:
                 t = check_press_time()
-                save_or_load(t, 5, screen)
+                game_board = save_or_load(t, 5, screen)
 
             if event.key == pygame.K_6:
                 t = check_press_time()
-                save_or_load(t, 6, screen)
+                game_board = save_or_load(t, 6, screen)
 
             if event.key == pygame.K_7:
                 t = check_press_time()
-                save_or_load(t, 7, screen)
+                game_board = save_or_load(t, 7, screen)
 
             if event.key == pygame.K_8:
                 t = check_press_time()
-                save_or_load(t, 8, screen)
+                game_board = save_or_load(t, 8, screen)
 
             if event.key == pygame.K_9:
                 t = check_press_time()
-                save_or_load(t, 9, screen)
+                game_board = save_or_load(t, 9, screen)
 
             # move the soldier by keyboard
             if not see_trap_mode:
@@ -94,14 +94,14 @@ def check_press_time():
 def save_or_load(time_pressed, key, screen):
     global game_board
     global soldier
-
     if time_pressed > 1:
         Database.save_data(key, game_board)
     else:
         game_board = Database.load_data_for_game(key, game_board)
         soldier.set_map(game_board)
-        Screen.display_screen(screen, game_board)
+        Screen.display_screen(screen, soldier.get_map())
         print(game_board)
+    return game_board
 
 
 # main game loop
