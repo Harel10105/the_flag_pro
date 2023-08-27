@@ -1,6 +1,7 @@
 import consts
 
 
+# moving the guard function
 def move_guard(guard_location, is_guard_move_left):
     if check_guard_boarder(guard_location, is_guard_move_left):
         if is_guard_move_left:
@@ -27,6 +28,7 @@ def check_guard_boarder(guard_location, is_guard_move_left):
     return True
 
 
+# find the guard location
 def find_guard(game_board):
     for row in range(consts.NUM_OF_ROWS):
         for col in range(consts.NUM_OF_COLS):
