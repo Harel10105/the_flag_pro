@@ -30,6 +30,7 @@ def display_night_vision_screen(screen, game_board):
     screen.blit(img, (0, 0))
     display_traps(screen, game_board)
     display_soldier(screen, game_board, consts.NIGHT_VISION_SOLDIER)
+    display_teleports(screen, game_board)
     display_flag(screen)
 
     pygame.display.flip()
@@ -82,6 +83,21 @@ def display_flag(screen):
     display_image(screen, consts.FLAG_IMAGE, flag_location)
 
 
+# draw the teleports
+def display_teleports(screen, game_board):
+    for row in range(len(game_board)):
+        counter = 3
+        for col in range(len(game_board[row])):
+            if game_board[row][col] == consts.TP and counter % 3 == 0:
+                img = pygame.image.load(consts.TP_IMAGE)
+                img.set_colorkey(consts.REMOVE_COLOR)
+                screen.blit(img, (col * consts.SCREEN_BLOCK_WIDTH,
+                                  row * consts.SCREEN_BLOCK_HEIGHT))
+                counter += 1
+            elif game_board[row][col] != consts.TP:
+                counter = 3
+
+
 # display wining screen
 def display_win(screen):
     display_image(screen, consts.WIN_IMAGE, (0, 0))
@@ -96,7 +112,8 @@ def display_lose(screen, soldier):
     display_flag(screen)
     soldier_location = soldier.get_location()
     display_image(screen, consts.INJURY_IMAGE, (soldier_location[1] * consts.SCREEN_BLOCK_WIDTH,
-                                                soldier_location[0] * consts.SCREEN_BLOCK_HEIGHT - consts.SOLDIER_BLOCK_HEIGHT * 5))
+                                                soldier_location[
+                                                    0] * consts.SCREEN_BLOCK_HEIGHT - consts.SOLDIER_BLOCK_HEIGHT * 5))
     display_image(screen, consts.EXPLOSION_IMAGE, (
         soldier_location[1] * consts.SCREEN_BLOCK_WIDTH - consts.SCREEN_BLOCK_WIDTH / 2,
         soldier_location[0] * consts.SCREEN_BLOCK_HEIGHT))

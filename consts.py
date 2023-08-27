@@ -39,6 +39,7 @@ INJURY_IMAGE = "images/injury.png"
 EXPLOSION_IMAGE = "images/explotion.png"
 NIGHT_VISION_BACKGROUND = "images/Final_lazer-net.png"
 NIGHT_VISION_SOLDIER = "images/soldier_nigth.png"
+TP_IMAGE = "images/teleport.png"
 WIN_IMAGE = "images/youWin.png"
 LOSE_IMAGE = "images/game_over.png"
 
@@ -62,3 +63,4 @@ SOLDIER_HEIGHT = SOLDIER_BLOCK_HEIGHT * SCREEN_BLOCK_HEIGHT
 
 # constants of teleport settings
 NUM_OF_TP = 5
+TP_BLOCKS_WIDTH = 3

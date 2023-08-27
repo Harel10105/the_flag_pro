@@ -1,3 +1,5 @@
+import random
+
 import consts
 
 
@@ -6,6 +8,7 @@ class Soldier:
     this class is for the soldier character.
     The values that the class save is the soldier's map and his location
     """
+
     def __init__(self, game_map, start_location):
         self._soldier_location = start_location
         self._game_map = game_map
@@ -23,6 +26,11 @@ class Soldier:
     def set_map(self, game_board):
         self._game_map = game_board
         self.__find_me()
+
+    def set_location(self, new_location):
+        self._game_map[self._soldier_location[0]][self._soldier_location[1]] = consts.FREE_SPACE
+        self._game_map[new_location[0]][new_location[1]] = consts.SOLDIER
+        self._soldier_location = new_location
 
     # updating the location of the soldier
     def update_location(self, new_location):
@@ -62,5 +70,11 @@ class Soldier:
                 if self._game_map[row][col] == consts.SOLDIER:
                     self._soldier_location = [row, col]
 
-
+    def is_touch_tp(self, game_board, tp_location_list):
+        if (game_board[self._soldier_location[0] + 3][self._soldier_location[1]] == consts.TP) or \
+                (game_board[self._soldier_location[0] + 3][self._soldier_location[1] + 1] == consts.TP):
+            rnd_tp_location = random.sample(tp_location_list, 1)
+            self.set_location([rnd_tp_location[0][0] - consts.SOLDIER_BLOCK_HEIGHT - 1,
+                               rnd_tp_location[0][1]])
+        return self._game_map
 

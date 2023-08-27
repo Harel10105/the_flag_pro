@@ -7,6 +7,7 @@ import consts
 import game_field
 import Screen
 import Soldier
+import teleport
 
 global finish_game
 global see_trap_mode
@@ -117,12 +118,14 @@ def main():
     game_field.generate_bush_locations(game_board)
     game_field.generate_trap_locations(game_board)
     game_field.locate_flag(game_board)
+    tp_location_list = teleport.generate_teleport_locations(game_board)
     soldier = Soldier.Soldier(game_board, [0, 0])
 
     finish_game = False
     while not finish_game:
         if not see_trap_mode:
             Screen.display_screen(screen, game_board)
+            game_board = soldier.is_touch_tp(game_board, tp_location_list)
         else:
             Screen.display_night_vision_screen(screen, game_board)
             see_trap_mode = False
