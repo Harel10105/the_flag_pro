@@ -10,6 +10,7 @@ import Soldier
 import guard
 import teleport
 
+# globals of the game
 global finish_game
 global see_trap_mode
 global game_board
@@ -155,6 +156,6 @@ def main():
 
         clock.tick(consts.REFRESH_RATE)
 
-
+# game run
 if __name__ == '__main__':
     main()

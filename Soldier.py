@@ -70,6 +70,7 @@ class Soldier:
                 if self._game_map[row][col] == consts.SOLDIER:
                     self._soldier_location = [row, col]
 
+    # check if the soldier touched a teleport and teleporting him
     def is_touch_tp(self, game_board, tp_location_list):
         if (game_board[self._soldier_location[0] + 3][self._soldier_location[1]] == consts.TP) or \
                 (game_board[self._soldier_location[0] + 3][self._soldier_location[1] + 1] == consts.TP):
@@ -78,6 +79,7 @@ class Soldier:
                                rnd_tp_location[0][1]])
         return self._game_map
 
+    # check if the guard catch the soldier
     def is_touch_guard(self):
         for rowPlus in range(consts.SOLDIER_BLOCK_HEIGHT):
             for colPlus in range(consts.SOLDIER_BLOCK_WIDTH):
