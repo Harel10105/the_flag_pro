@@ -32,6 +32,7 @@ def move_guard(guard_location, is_guard_move_left, soldier):
     return guard_location, is_guard_move_left
 
 
+# check the guard is in he borders of the game board
 def check_guard_boarder(guard_location, is_guard_move_left):
     if is_guard_move_left:
         if guard_location[1] - 1 == 0:
@@ -50,6 +51,7 @@ def find_guard(game_board):
                 return [row, col]
 
 
+# check if the guard is in angry mode
 def is_guard_angry(guard_location, soldier_location, is_guard_move_left):
     if soldier_location[0] - 1 < consts.GUARD_LOCATION_HEIGHT < soldier_location[0] + 4:
 

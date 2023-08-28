@@ -5,7 +5,6 @@ import consts
 import guard
 
 
-
 # pygame library init lines and return the pygame screen
 def pygame_init():
     pygame.init()
@@ -109,7 +108,7 @@ def display_guard(screen, game_board):
         for col in range(len(game_board[row])):
             if game_board[row][col] == consts.GUARD:
                 display_image(screen, guard.current_guard_image, (col * consts.SCREEN_BLOCK_WIDTH,
-                                                            consts.GUARD_LOCATION_HEIGHT * consts.SCREEN_BLOCK_HEIGHT))
+                                                                  consts.GUARD_LOCATION_HEIGHT * consts.SCREEN_BLOCK_HEIGHT))
 
 
 # display wining screen

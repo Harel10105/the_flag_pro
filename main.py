@@ -135,19 +135,19 @@ def main():
     see_trap_mode = False
     is_guard_move_left = True
     gourd_walk_counter = 1
-    guard_speed = consts.GUARD_MOVE_F
-    normal_speed = consts.GUARD_MOVE_F
-    angry_guard_speed = consts.GUARD_MOVE_F - 3
+    normal_speed = consts.GUARD_MOVE_SPEED
+    angry_guard_speed = consts.GUARD_MOVE_SPEED_ANGRY
 
+    guard_speed = normal_speed
     finish_game = False
     while not finish_game:
         if not see_trap_mode:
             if gourd_walk_counter % guard_speed == 0:
                 game_board[guard_location[0]][guard_location[1]] = consts.FREE_SPACE
-                guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left,soldier)
+                guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left, soldier)
                 game_board[guard_location[0]][guard_location[1]] = consts.GUARD
-                if guard.is_guard_angry(guard_location,soldier.get_location(), is_guard_move_left):
-                    guard_speed  =  angry_guard_speed
+                if guard.is_guard_angry(guard_location, soldier.get_location(), is_guard_move_left):
+                    guard_speed = angry_guard_speed
                 else:
                     guard_speed = normal_speed
                 soldier.set_map(game_board)
@@ -161,7 +161,7 @@ def main():
         # lose conditions
         if soldier.is_touch_trap() or soldier.is_touch_guard():
             trap_sound.play()
-            Screen.display_lose(screen, soldier,game_board)
+            Screen.display_lose(screen, soldier, game_board)
             finish_game = True
         # win condition
         elif soldier.is_touch_flag():
