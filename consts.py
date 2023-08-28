@@ -45,6 +45,10 @@ GUARD_IMAGE = "images/the_guard.png"
 WIN_IMAGE = "images/youWin.png"
 LOSE_IMAGE = "images/game_over.png"
 
+# constants of sound path
+
+BOMB_SOUND = "sounds/hit-sound-effect.mp3"
+
 # constants of bushes settings
 NUM_OF_BUSHES = 20
 BUSH_HEIGHT = 40

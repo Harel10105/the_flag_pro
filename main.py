@@ -119,15 +119,20 @@ def main():
     global soldier
     global guard_location
 
-    see_trap_mode = False
     screen, clock = Screen.pygame_init()
     game_board = game_field.create_board()
+
     game_field.generate_bush_locations(game_board)
     game_field.generate_trap_locations(game_board)
     game_field.locate_flag(game_board)
     tp_location_list = teleport.generate_teleport_locations(game_board)
+
     soldier = Soldier.Soldier(game_board, [0, 0])
     guard_location = [int(consts.NUM_OF_ROWS / 2) - 1, consts.NUM_OF_COLS - 1]
+
+    trap_sound = pygame.mixer.Sound(consts.BOMB_SOUND)
+
+    see_trap_mode = False
     is_guard_move_left = True
     gourd_walk_counter = 1
 
@@ -146,15 +151,19 @@ def main():
             Screen.display_night_vision_screen(screen, game_board)
             see_trap_mode = False
 
+        # lose conditions
         if soldier.is_touch_trap() or soldier.is_touch_guard():
+            trap_sound.play()
             Screen.display_lose(screen, soldier)
             finish_game = True
+        # win condition
         elif soldier.is_touch_flag():
             Screen.display_win(screen)
             finish_game = True
         pygame_keys_events(screen)
 
         clock.tick(consts.REFRESH_RATE)
+
 
 # game run
 if __name__ == '__main__':

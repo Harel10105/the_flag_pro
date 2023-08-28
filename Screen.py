@@ -7,6 +7,7 @@ import consts
 # pygame library init lines and return the pygame screen
 def pygame_init():
     pygame.init()
+    pygame.mixer.init()
     pygame.display.set_caption("The Flag")
     screen = pygame.display.set_mode(consts.SCREEN_SIZE)
     clock = pygame.time.Clock()
