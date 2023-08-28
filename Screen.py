@@ -117,11 +117,12 @@ def display_win(screen):
 
 
 # display lose screen
-def display_lose(screen, soldier):
+def display_lose(screen, soldier,game_board):
     screen.fill(consts.SCREEN_BACKGROUND)
     display_bushes(screen, soldier.get_map())
     display_flag(screen)
     soldier_location = soldier.get_location()
+    display_guard(screen,game_board)
     display_image(screen, consts.INJURY_IMAGE, (soldier_location[1] * consts.SCREEN_BLOCK_WIDTH,
                                                 soldier_location[
                                                     0] * consts.SCREEN_BLOCK_HEIGHT - consts.SOLDIER_BLOCK_HEIGHT * 5))

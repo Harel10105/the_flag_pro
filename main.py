@@ -154,7 +154,7 @@ def main():
         # lose conditions
         if soldier.is_touch_trap() or soldier.is_touch_guard():
             trap_sound.play()
-            Screen.display_lose(screen, soldier)
+            Screen.display_lose(screen, soldier,game_board)
             finish_game = True
         # win condition
         elif soldier.is_touch_flag():
