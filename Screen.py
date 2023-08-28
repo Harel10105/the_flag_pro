@@ -16,7 +16,8 @@ def pygame_init():
 
 # draw the regular screen
 def display_screen(screen, game_board):
-    screen.fill(consts.SCREEN_BACKGROUND)
+    img = pygame.image.load(consts.SCREEN_BACKGROUND_IMAGE)
+    screen.blit(img, (0, 0))
     display_bushes(screen, game_board)
     display_soldier(screen, game_board, consts.SOLDIER_IMAGE)
     display_guard(screen, game_board)
@@ -117,12 +118,13 @@ def display_win(screen):
 
 
 # display lose screen
-def display_lose(screen, soldier,game_board):
-    screen.fill(consts.SCREEN_BACKGROUND)
+def display_lose(screen, soldier, game_board):
+    img = pygame.image.load(consts.SCREEN_BACKGROUND_IMAGE)
+    screen.blit(img, (0, 0))
     display_bushes(screen, soldier.get_map())
     display_flag(screen)
     soldier_location = soldier.get_location()
-    display_guard(screen,game_board)
+    display_guard(screen, game_board)
     display_image(screen, consts.INJURY_IMAGE, (soldier_location[1] * consts.SCREEN_BLOCK_WIDTH,
                                                 soldier_location[
                                                     0] * consts.SCREEN_BLOCK_HEIGHT - consts.SOLDIER_BLOCK_HEIGHT * 5))

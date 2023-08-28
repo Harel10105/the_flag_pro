@@ -44,6 +44,7 @@ TP_IMAGE = "images/teleport.png"
 GUARD_IMAGE = "images/the_guard.png"
 WIN_IMAGE = "images/youWin.png"
 LOSE_IMAGE = "images/game_over.png"
+SCREEN_BACKGROUND_IMAGE = "images/Grass_background__.png"
 
 # constants of sound path
 
