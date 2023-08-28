@@ -135,14 +135,21 @@ def main():
     see_trap_mode = False
     is_guard_move_left = True
     gourd_walk_counter = 1
+    guard_speed = consts.GUARD_MOVE_F
+    normal_speed = consts.GUARD_MOVE_F
+    angry_guard_speed = consts.GUARD_MOVE_F - 3
 
     finish_game = False
     while not finish_game:
         if not see_trap_mode:
-            if gourd_walk_counter % consts.GUARD_MOVE_F == 0:
+            if gourd_walk_counter % guard_speed == 0:
                 game_board[guard_location[0]][guard_location[1]] = consts.FREE_SPACE
                 guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left,soldier)
                 game_board[guard_location[0]][guard_location[1]] = consts.GUARD
+                if guard.is_guard_angry(guard_location,soldier.get_location(), is_guard_move_left):
+                    guard_speed  =  angry_guard_speed
+                else:
+                    guard_speed = normal_speed
                 soldier.set_map(game_board)
             Screen.display_screen(screen, game_board)
             gourd_walk_counter += 1
