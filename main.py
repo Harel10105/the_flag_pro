@@ -141,7 +141,7 @@ def main():
         if not see_trap_mode:
             if gourd_walk_counter % consts.GUARD_MOVE_F == 0:
                 game_board[guard_location[0]][guard_location[1]] = consts.FREE_SPACE
-                guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left)
+                guard_location, is_guard_move_left = guard.move_guard(guard_location, is_guard_move_left,soldier)
                 game_board[guard_location[0]][guard_location[1]] = consts.GUARD
                 soldier.set_map(game_board)
             Screen.display_screen(screen, game_board)

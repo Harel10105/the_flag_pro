@@ -2,6 +2,8 @@ import time
 import pygame
 
 import consts
+import guard
+
 
 
 # pygame library init lines and return the pygame screen
@@ -19,8 +21,8 @@ def display_screen(screen, game_board):
     img = pygame.image.load(consts.SCREEN_BACKGROUND_IMAGE)
     screen.blit(img, (0, 0))
     display_bushes(screen, game_board)
-    display_soldier(screen, game_board, consts.SOLDIER_IMAGE)
     display_guard(screen, game_board)
+    display_soldier(screen, game_board, consts.SOLDIER_IMAGE)
     display_flag(screen)
     pygame.display.flip()
     pygame.display.update()
@@ -106,8 +108,8 @@ def display_guard(screen, game_board):
     for row in range(len(game_board)):
         for col in range(len(game_board[row])):
             if game_board[row][col] == consts.GUARD:
-                display_image(screen, consts.GUARD_IMAGE, (col * consts.SCREEN_BLOCK_WIDTH,
-                                                           consts.GUARD_LOCATION_HEIGHT * consts.SCREEN_BLOCK_HEIGHT))
+                display_image(screen, guard.current_guard_image, (col * consts.SCREEN_BLOCK_WIDTH,
+                                                            consts.GUARD_LOCATION_HEIGHT * consts.SCREEN_BLOCK_HEIGHT))
 
 
 # display wining screen
